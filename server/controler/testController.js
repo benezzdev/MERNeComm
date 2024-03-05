@@ -5,7 +5,7 @@ const testFunction = async (req, res) => {
   // const allDeals = await dealsModel.find()
   res.status(200).json({
     message: "this is a test route",
-    // allDeals
+    // allDeals results
   });
 };
 
