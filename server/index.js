@@ -16,8 +16,9 @@ app.use(
 );
 app.use(cors());
 
-app.use("/api/test", TestRouter);
 const port = process.env.PORT || 5049;
+
+console.log("process.env.MONGO_URI", process.env.MONGO_URI);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
@@ -29,6 +30,8 @@ mongoose
     });
   })
   .catch((err) => console.log(err));
+
+app.use("/api/test", TestRouter);
 
 app.use("*", (req, res) =>
   res.status(404).json({ error: "Endpoint not found." })
