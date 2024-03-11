@@ -12,3 +12,5 @@ export const getAllDeals = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+// TODO: 2 x getAllDeals functions. One for pending (admin), one for approved (users)

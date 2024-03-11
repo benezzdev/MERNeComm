@@ -12,3 +12,13 @@ export const getAllUsers = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const getOneUser = async (req, res) => {
+  console.log("testing get one user route");
+  const { id } = req.params;
+  console.log("id", id);
+
+  const user = await UserModel.findById({ _id: id });
+  console.log("user", user);
+  res.status(200).json(user);
+};

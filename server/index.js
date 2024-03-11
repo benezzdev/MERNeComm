@@ -4,7 +4,6 @@ dotenv.config();
 
 import express from "express";
 import cors from "cors";
-import TestRouter from "./routers/userRouter.js";
 import mongoose from "mongoose";
 import UserRouter from "./routers/userRouter.js";
 import DealRouter from "./routers/dealRouter.js";
