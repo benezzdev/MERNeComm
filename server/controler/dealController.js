@@ -6,7 +6,7 @@ export const dealRoute = (req, res) => {
 
 export const getAllDeals = async (req, res) => {
   try {
-    const allDeals = await UserModel.find();
+    const allDeals = await dealModel.find();
     res.status(200).json(allDeals);
   } catch {
     res.status(404).json({ message: error.message });

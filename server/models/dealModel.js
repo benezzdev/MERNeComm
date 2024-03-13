@@ -10,6 +10,4 @@ const dealSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const dealModel = mongoose.model("Deal", dealSchema);
-
-//TODO:
+export const dealModel = mongoose.model("deal", dealSchema);
