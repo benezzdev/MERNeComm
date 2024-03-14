@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-
 import "./App.css";
+import { Button } from "antd";
 
 interface User {
   email: string;
@@ -29,6 +29,9 @@ function App() {
 
   return (
     <>
+      <>
+        <Button type="primary">Button</Button>
+      </>
       <h1>All Users</h1>
     </>
   );
