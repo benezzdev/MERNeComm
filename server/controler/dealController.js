@@ -1,4 +1,4 @@
-import { dealModel } from "../models/dealModel.js";
+import { DealModel } from "../models/dealModel.js";
 
 export const dealRoute = (req, res) => {
   res.send("Deal Route Test");
@@ -6,7 +6,7 @@ export const dealRoute = (req, res) => {
 
 export const getAllDeals = async (req, res) => {
   try {
-    const allDeals = await dealModel.find();
+    const allDeals = await DealModel.find().sort({ timestamps: -1 }).limit(20);
     res.status(200).json(allDeals);
   } catch {
     res.status(404).json({ message: error.message });
