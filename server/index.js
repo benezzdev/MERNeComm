@@ -7,6 +7,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import UserRouter from "./routers/userRouter.js";
 import DealRouter from "./routers/dealRouter.js";
+import { cloudinaryConfig } from "./config/cloudinary.js";
 const app = express();
 
 app.use(express.json());
@@ -16,6 +17,8 @@ app.use(
   })
 );
 app.use(cors());
+
+cloudinaryConfig();
 
 const port = process.env.PORT || 5049;
 

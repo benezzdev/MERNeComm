@@ -1,4 +1,5 @@
 import { UserModel } from "../models/userModel.js";
+import { imageUpload } from "../utils/uploadImage.js";
 
 export const testRoute = (req, res) => {
   res.send("User Route Test");
@@ -43,10 +44,13 @@ export const createUser = async (req, res) => {
   }
 
   try {
+    const uploadedImage = await imageUpload(req.file, "avatar");
+    const { secure_url, public_id } = uploadedImage;
     const newUser = new UserModel({
       email: email,
       password: password,
       username: username,
+      avatar: secure_url,
     });
     const user = await newUser.save();
     res.status(201).json({ message: "User Created", user: user });

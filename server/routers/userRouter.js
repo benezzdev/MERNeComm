@@ -4,11 +4,11 @@ import {
   getAllUsers,
   getOneUser,
 } from "../controler/userController.js";
-
+import { multerUpload } from "../middleware/multer.js";
 const UserRouter = express.Router();
 
 UserRouter.get("/allusers", getAllUsers);
-UserRouter.post("/register", createUser);
 UserRouter.get("/:id", getOneUser);
+UserRouter.post("/register", multerUpload.single("avatar"), createUser);
 
 export default UserRouter;
