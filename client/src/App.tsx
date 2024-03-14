@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { Button } from "antd";
 
-interface User {
+interface Deal {
   email: string;
   _id: string;
   password: string;
 }
 
 function App() {
-  const [users, setUsers] = useState<User[] | null>(null);
+  const [Deals, setDeals] = useState<Deal[] | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,22 +17,22 @@ function App() {
         method: "GET",
         redirect: "follow",
       };
-      fetch("http://localhost:5049/api/user/allusers", requestOptions)
+      fetch("http://localhost:5049/api/deal/alldeals", requestOptions)
         .then((response) => response.json())
-        .then((result) => setUsers(result))
+        .then((result) => setDeals(result))
         .catch((error) => console.error(error));
     };
     fetchData();
   }, []);
 
-  console.log("users :>> ", users);
+  console.log("deals :>> ", Deals);
 
   return (
     <>
       <>
         <Button type="primary">Button</Button>
       </>
-      <h1>All Users</h1>
+      <h1>All Deals</h1>
     </>
   );
 }
