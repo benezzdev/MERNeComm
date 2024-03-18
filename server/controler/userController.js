@@ -1,3 +1,4 @@
+import { generateToken } from "../middleware/jwt.js";
 import { UserModel } from "../models/userModel.js";
 import { hashPassword, verifyPassword } from "../utils/bcrypt.js";
 import { imageUpload } from "../utils/uploadImage.js";
@@ -75,8 +76,14 @@ export const loginUser = async (req, res) => {
     console.log("hashedPassword :>>", hashedPassword);
     const verified = verifyPassword(password, hashedPassword);
     if (verified) {
-      console.log("User verified");
-      return res.status(201).json({ message: "User Logged in", user: email });
+      const token = generateToken(user);
+
+      if (token) {
+        console.log("User verified");
+        res.status(201).json({ message: "User Logged in", token: token });
+      } else {
+        console.log("failed to generate token");
+      }
     } else {
       console.log("Verification failed");
     }
