@@ -1,4 +1,5 @@
 import { UserModel } from "../models/userModel.js";
+import { hashPassword } from "../utils/bcrypt.js";
 import { imageUpload } from "../utils/uploadImage.js";
 
 export const testRoute = (req, res) => {
@@ -46,9 +47,11 @@ export const createUser = async (req, res) => {
   try {
     const uploadedImage = await imageUpload(req.file, "avatar");
     const { secure_url, public_id } = uploadedImage;
+    console.log("hashing password");
+    const hashedPassword = await hashPassword(password);
     const newUser = new UserModel({
       email: email,
-      password: password,
+      password: hashedPassword,
       username: username,
       avatar: secure_url,
     });

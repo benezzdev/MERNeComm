@@ -9,7 +9,7 @@ export const getAllDeals = async (req, res) => {
     const allDeals = await DealModel.find().sort({ timestamps: -1 }).limit(20);
     res.status(200).json(allDeals);
   } catch {
-    res.status(404).json({ message: error.message });
+    res.status(404).json({ message: "error" });
   }
 };
 

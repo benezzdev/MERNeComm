@@ -10,5 +10,6 @@ const UserRouter = express.Router();
 UserRouter.get("/allusers", getAllUsers);
 UserRouter.get("/:id", getOneUser);
 UserRouter.post("/register", multerUpload.single("avatar"), createUser);
+UserRouter.post("/login, loginUser");
 
 export default UserRouter;
