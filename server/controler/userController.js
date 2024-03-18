@@ -1,5 +1,5 @@
 import { UserModel } from "../models/userModel.js";
-import { hashPassword } from "../utils/bcrypt.js";
+import { hashPassword, verifyPassword } from "../utils/bcrypt.js";
 import { imageUpload } from "../utils/uploadImage.js";
 
 export const testRoute = (req, res) => {
@@ -59,5 +59,28 @@ export const createUser = async (req, res) => {
     res.status(201).json({ message: "User Created", user: user });
   } catch (error) {
     res.status(409).json({ message: error.message });
+  }
+};
+
+export const loginUser = async (req, res) => {
+  console.log("Logging in User");
+  const { email, password } = req.body;
+  const user = await UserModel.findOne({
+    email: email,
+  });
+  console.log("user :>>", user);
+
+  if (user) {
+    const { password: hashedPassword } = user;
+    console.log("hashedPassword :>>", hashedPassword);
+    const verified = verifyPassword(password, hashedPassword);
+    if (verified) {
+      console.log("User verified");
+      return res.status(201).json({ message: "User Logged in", user: email });
+    } else {
+      console.log("Verification failed");
+    }
+  } else {
+    return res.status(500).json({ message: "Wrong password" });
   }
 };
