@@ -5,7 +5,11 @@ const dealSchema = new mongoose.Schema(
     title: { type: String, required: true },
     descreption: { type: String, required: true },
     email: { type: String, required: true, unique: false },
-    // pending: { type: Boolean, default: true },
+    image: {
+      type: String,
+
+      default: "https://api.dicebear.com/8.x/shapes/svg?seed=Jasper",
+    },
   },
   { timestamps: true }
 );
