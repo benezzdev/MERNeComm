@@ -35,6 +35,11 @@ const AuthenticatedMenu = () => {
       icon: <UserOutlined />,
     },
     {
+      label: <Link to="signup">SignUp</Link>,
+      key: "signUp",
+      icon: <UserOutlined />,
+    },
+    {
       label: <Link to="about">About </Link>,
       key: "about",
       icon: <ReadOutlined />,

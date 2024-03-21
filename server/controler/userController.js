@@ -35,6 +35,9 @@ export const createUser = async (req, res) => {
   console.log("creating user");
   const { email, password, username } = req.body;
 
+  //   if (password.lenght < 5) {
+  //   res.status(400).json("password too short")
+  // }
   if (!email || !password) {
     return res.status(400).json({ message: "Email and Password are required" });
   }
@@ -66,6 +69,7 @@ export const createUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   console.log("Logging in User");
   const { email, password } = req.body;
+  console.log("req.body", req.body);
   const user = await UserModel.findOne({
     email: email,
   });

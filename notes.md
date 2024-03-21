@@ -34,5 +34,5 @@ c) return the found document to the client in the response
 Client:
 a) insert a clickable link (that takes us to a dzynamic URL) in each of the deals in the Home/view with all Deals
 b) create a component (e.g. dealsDetail) that renders when we navigate to the dynamic url
-c) grab id/name from the deal from the url (using useLocation hook).
+c) grab id/name from the deal from the url (using useParams hook).
 e) build a fetch function to the backend's endpoint including the id

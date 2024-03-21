@@ -1,6 +1,8 @@
 import React from "react";
 
-function About() {
+type Props = {};
+
+function About({}: Props) {
   return (
     <>
       <h3>About</h3>
