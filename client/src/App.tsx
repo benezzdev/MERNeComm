@@ -1,39 +1,37 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import { Button } from "antd";
+import React from "react";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Deals from "./Pages/Deals";
 
-interface Deal {
-  email: string;
-  _id: string;
-  password: string;
-}
+import About from "./Pages/About";
+import Account from "./Pages/Account";
+import ErrorPage from "./Pages/ErrorPage";
+import Favourites from "./Pages/Favourites";
+import ProtectedRoute from "./Components/ProtectedRoute";
+import SignIn from "./Pages/SignIn";
+import SignUp from "./Pages/SignUp";
+import { Menu } from "./Components/Menu";
 
 function App() {
-  const [Deals, setDeals] = useState<Deal[] | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const requestOptions = {
-        method: "GET",
-        redirect: "follow",
-      };
-      fetch("http://localhost:5049/api/deal/alldeals", requestOptions)
-        .then((response) => response.json())
-        .then((result) => setDeals(result))
-        .catch((error) => console.error(error));
-    };
-    fetchData();
-  }, []);
-
-  console.log("deals :>> ", Deals);
-
   return (
-    <>
-      <>
-        <Button type="primary">Button</Button>
-      </>
-      <h1>All Deals</h1>
-    </>
+    <BrowserRouter>
+      <Menu />
+      <Routes>
+        <Route path="/" element={<Deals />} />
+        <Route path="/favorites" element={<Favourites />} />
+        <Route path="/about" element={<About />} />
+        <Route
+          path="/account"
+          element={
+            <ProtectedRoute>
+              <Account />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
