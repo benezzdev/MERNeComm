@@ -12,9 +12,9 @@ export const imageUpload = async (file, folder) => {
       return { secure_url, public_id };
     } catch (e) {
       console.log(e);
-      return undefined;
+      throw new Error(e);
     }
   } else {
-    return undefined;
+    throw new Error("file undefined");
   }
 };

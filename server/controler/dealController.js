@@ -36,15 +36,18 @@ export const createDeal = async (req, res) => {
 
   try {
     const uploadedImage = await imageUpload(req.file, "image");
-    const { secure_url, public_id } = uploadedImage;
-    const newDeal = new DealModel({
-      email: email,
-      title: title,
-      descreption: descreption,
-      image: secure_url,
-    });
-    const deal = await newDeal.save();
-    res.status(201).json({ message: "Deal Created", deal: deal });
+
+    if (uploadedImage) {
+      const { secure_url, public_id } = uploadedImage;
+      const newDeal = new DealModel({
+        email: email,
+        title: title,
+        descreption: descreption,
+        image: secure_url,
+      });
+      const deal = await newDeal.save();
+      res.status(201).json({ message: "Deal Created", deal: deal });
+    }
   } catch (error) {
     res.status(409).json({ message: error.message });
   }

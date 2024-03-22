@@ -33,7 +33,7 @@ export const getOneUser = async (req, res) => {
 
 export const createUser = async (req, res) => {
   console.log("creating user");
-  const { email, password, username } = req.body;
+  const { email, password } = req.body;
 
   //   if (password.lenght < 5) {
   //   res.status(400).json("password too short")
@@ -49,15 +49,15 @@ export const createUser = async (req, res) => {
   }
 
   try {
-    const uploadedImage = await imageUpload(req.file, "avatar");
-    const { secure_url, public_id } = uploadedImage;
-    console.log("hashing password");
+    // const uploadedImage = await imageUpload(req.file, "avatar");
+    // const { secure_url, public_id } = uploadedImage;
+    // console.log("hashing password");
     const hashedPassword = await hashPassword(password);
     const newUser = new UserModel({
       email: email,
       password: hashedPassword,
-      username: username,
-      avatar: secure_url,
+      // username: username,
+      // avatar: secure_url,
     });
     const user = await newUser.save();
     res.status(201).json({ message: "User Created", user: user });

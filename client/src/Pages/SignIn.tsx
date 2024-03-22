@@ -1,5 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 type credentialsType = {
   email: string;
@@ -7,11 +6,6 @@ type credentialsType = {
 };
 
 function SignIn() {
-  const param = useParams();
-  console.log("param", param);
-
-  const location = useLocation();
-  console.log("location", location);
   const [credentials, setCredentials] = useState<credentialsType>(
     {} as credentialsType
   );
@@ -51,7 +45,7 @@ function SignIn() {
   };
   return (
     <>
-      <h3>Create Account</h3>
+      <h3>Sign In</h3>
 
       <form onSubmit={submitLogin}>
         <input

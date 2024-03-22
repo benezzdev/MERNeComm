@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useState } from "react";
 import {
   HeartOutlined,
   HomeOutlined,
@@ -24,18 +24,23 @@ const AuthenticatedMenu = () => {
       icon: <HeartOutlined />,
     },
     {
+      label: <Link to="createdeal">Post a new deal </Link>,
+      key: "createdeal",
+      icon: <ReadOutlined />,
+    },
+    {
       label: <Link to="account">Account</Link>,
       key: "account",
       icon: <UserOutlined />,
     },
 
     {
-      label: <Link to="signin">SignIn</Link>,
+      label: <Link to="signin">Sign in</Link>,
       key: "signin",
       icon: <UserOutlined />,
     },
     {
-      label: <Link to="signup">SignUp</Link>,
+      label: <Link to="signup">Sign up</Link>,
       key: "signUp",
       icon: <UserOutlined />,
     },
