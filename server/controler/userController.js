@@ -78,7 +78,7 @@ export const loginUser = async (req, res) => {
   if (user) {
     const { password: hashedPassword } = user;
     console.log("hashedPassword :>>", hashedPassword);
-    const verified = verifyPassword(password, hashedPassword);
+    const verified = await verifyPassword(password, hashedPassword);
     if (verified) {
       const token = generateToken(user);
 

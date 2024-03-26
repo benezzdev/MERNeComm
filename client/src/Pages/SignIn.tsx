@@ -42,6 +42,14 @@ function SignIn() {
     );
     const result = await response.json();
     console.log("result", result);
+    const { token, _id } = result;
+    if (token) {
+      console.log("setting token", token);
+      localStorage.setItem("token", token);
+    }
+    if (_id) {
+      setCredentials(_id);
+    }
   };
   return (
     <>

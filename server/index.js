@@ -1,13 +1,14 @@
 import * as dotenv from "dotenv";
 // loading .env file
 dotenv.config();
-
+import passport from "passport";
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import UserRouter from "./routers/userRouter.js";
 import DealRouter from "./routers/dealRouter.js";
 import { cloudinaryConfig } from "./config/cloudinary.js";
+import { passportConfig } from "./config/passportConfig.js";
 const app = express();
 
 app.use(express.json());
@@ -34,6 +35,8 @@ mongoose
     });
   })
   .catch((err) => console.log(err));
+app.use(passport.initialize());
+console.log(passportConfig());
 
 app.use("/api/user", UserRouter);
 app.use("/api/deal", DealRouter);
