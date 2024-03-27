@@ -15,8 +15,7 @@ const DealsGrid = ({ deals }: GridProps) => {
             <Col key={deal._id} md={6} sm={8} xs={16}>
               <DealCard
                 ein={deal._id}
-                cover={deal.image}
-                avatar={deal.image}
+                image={deal.image}
                 title={deal.title}
                 descreption={deal.descreption}
               />

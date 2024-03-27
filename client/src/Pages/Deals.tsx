@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
-import { Button } from "antd";
-
-interface Deal {
-  email: string;
-  _id: string;
-  password: string;
-}
+import DealsGrid from "../Components/DealsGrid";
+import { Deal } from "../@Types/CustomTypes";
 
 function App() {
   const [Deals, setDeals] = useState<Deal[] | null>(null);
@@ -26,11 +21,7 @@ function App() {
 
   console.log("deals :>> ", Deals);
 
-  return (
-    <>
-      <h1>All Deals</h1>
-    </>
-  );
+  return <DealsGrid deals={Deals} />;
 }
 
 export default App;
