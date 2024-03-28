@@ -1,4 +1,5 @@
 import { generateToken } from "../middleware/jwt.js";
+import { DealModel } from "../models/dealModel.js";
 import { UserModel } from "../models/userModel.js";
 import { hashPassword, verifyPassword } from "../utils/bcrypt.js";
 import { imageUpload } from "../utils/uploadImage.js";
@@ -88,7 +89,16 @@ export const loginUser = async (req, res) => {
   }
 };
 
-export const updateUserFaves = (req, res) => {
+export const updateUserFaves = async (req, res) => {
   console.log("testing user faves func");
-  res.status(201).json({ message: "route working" });
+  const { favDeal, userID } = req.body;
+  const user = await UserModel.findOne({
+    _id: userID,
+  });
+  console.log("user :>>", user);
+  const deal = await DealModel.findOne({
+    _id: favDeal,
+  });
+  console.log("favDeal :>>", deal);
+  res.status(201).json({ message: "route working", user, deal });
 };
