@@ -9,6 +9,7 @@ import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
 import { Menu } from "./Components/Menu";
 import CreateDeal from "./Pages/CreateDeal";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 function App() {
   return (
@@ -16,8 +17,22 @@ function App() {
       <Menu />
       <Routes>
         <Route path="/" element={<Deals />} />
-        <Route path="/favorites" element={<Favourites />} />
-        <Route path="/createdeal" element={<CreateDeal />} />
+        <Route
+          path="/favorites"
+          element={
+            <ProtectedRoute>
+              <Favourites />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/createdeal"
+          element={
+            <ProtectedRoute>
+              <CreateDeal />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/about" element={<About />} />
         <Route path="/account" element={<Account />} />
         <Route path="/signin" element={<SignIn />} />

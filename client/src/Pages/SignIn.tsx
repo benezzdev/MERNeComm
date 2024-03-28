@@ -21,8 +21,13 @@ function SignIn() {
 
   const submitLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // const token = localStorage.getItem("token")
     console.log("credentials", credentials);
     const myHeaders = new Headers();
+    // myHeaders.append(
+    //   "Authorization",
+    //   `Bearer ${token}`
+    // );
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
     const urlencoded = new URLSearchParams();

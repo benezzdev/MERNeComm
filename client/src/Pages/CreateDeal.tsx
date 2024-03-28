@@ -23,6 +23,10 @@ function CreateDeal() {
   const submitDeal = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("dealInfo", dealInfo);
+    const token = localStorage.getItem("token");
+
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
 
     const formdata = new FormData();
     formdata.append("title", dealInfo.title);

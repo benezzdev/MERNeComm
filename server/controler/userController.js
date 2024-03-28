@@ -35,9 +35,6 @@ export const createUser = async (req, res) => {
   console.log("creating user");
   const { email, password } = req.body;
 
-  //   if (password.lenght < 5) {
-  //   res.status(400).json("password too short")
-  // }
   if (!email || !password) {
     return res.status(400).json({ message: "Email and Password are required" });
   }
@@ -49,15 +46,10 @@ export const createUser = async (req, res) => {
   }
 
   try {
-    // const uploadedImage = await imageUpload(req.file, "avatar");
-    // const { secure_url, public_id } = uploadedImage;
-    // console.log("hashing password");
     const hashedPassword = await hashPassword(password);
     const newUser = new UserModel({
       email: email,
       password: hashedPassword,
-      // username: username,
-      // avatar: secure_url,
     });
     const user = await newUser.save();
     res.status(201).json({ message: "User Created", user: user });
@@ -94,4 +86,9 @@ export const loginUser = async (req, res) => {
   } else {
     return res.status(500).json({ message: "Wrong password" });
   }
+};
+
+export const updateUserFaves = (req, res) => {
+  console.log("testing user faves func");
+  res.status(201).json({ message: "route working" });
 };

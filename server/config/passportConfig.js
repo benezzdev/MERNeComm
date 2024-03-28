@@ -13,6 +13,7 @@ const verify = (jwt_payload, done) => {
   const { sub } = jwt_payload;
   try {
     const user = UserModel.findById(sub);
+    console.log("user in passport", user);
     if (user) {
       return done(null, user);
     } else {
