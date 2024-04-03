@@ -9,3 +9,13 @@ export declare type Deal = {
   email: string;
   image: string;
 };
+
+
+export type User = {
+  _id:string,
+  createdAt:string,
+  updatedAt:string,
+  email: string,
+  favDeals: Array<string>,
+  avatar: string
+}

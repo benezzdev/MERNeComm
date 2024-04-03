@@ -10,10 +10,12 @@ import SignUp from "./Pages/SignUp";
 import { Menu } from "./Components/Menu";
 import CreateDeal from "./Pages/CreateDeal";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import {AuthContextProvider} from "./contexts/AuthContext";
 
 function App() {
   return (
     <BrowserRouter>
+        <AuthContextProvider>
       <Menu />
       <Routes>
         <Route path="/" element={<Deals />} />
@@ -39,6 +41,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
+        </AuthContextProvider>
     </BrowserRouter>
   );
 }

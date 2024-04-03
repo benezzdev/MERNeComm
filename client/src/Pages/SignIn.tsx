@@ -1,4 +1,5 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import {ChangeEvent, FormEvent, useContext, useState} from "react";
+import {AuthContext} from "../contexts/AuthContext";
 
 type credentialsType = {
   email: string;
@@ -6,6 +7,7 @@ type credentialsType = {
 };
 
 function SignIn() {
+  const {loginUser} = useContext(AuthContext)
   const [credentials, setCredentials] = useState<credentialsType>(
     {} as credentialsType
   );
@@ -21,41 +23,9 @@ function SignIn() {
 
   const submitLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const token = localStorage.getItem("token")
-    console.log("credentials", credentials);
-    const myHeaders = new Headers();
-    // myHeaders.append(
-    //   "Authorization",
-    //   `Bearer ${token}`
-    // );
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-
-    const urlencoded = new URLSearchParams();
-    urlencoded.append("email", credentials.email);
-    urlencoded.append("password", credentials.password);
-    //   urlencoded.append("credentials", credentials);
-
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: urlencoded,
-    };
-
-    const response = await fetch(
-      "http://localhost:5049/api/user/login",
-      requestOptions
-    );
-    const result = await response.json();
-    console.log("result", result);
-    const { token, _id } = result;
-    if (token) {
-      console.log("setting token", token);
-      localStorage.setItem("token", token);
-    }
-    if (_id) {
-      setCredentials(_id);
-    }
+    loginUser(credentials.email,credentials.password)
   };
+
   return (
     <>
       <h3>Sign In</h3>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import DealsGrid from "../Components/DealsGrid";
 import { Deal } from "../@Types/CustomTypes";
 
-function App() {
+function Deals() {
   const [Deals, setDeals] = useState<Deal[] | null>(null);
 
   useEffect(() => {
@@ -24,4 +24,4 @@ function App() {
   return <DealsGrid deals={Deals} />;
 }
 
-export default App;
+export default Deals;

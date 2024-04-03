@@ -1,7 +1,9 @@
 import { EllipsisOutlined, HeartOutlined } from "@ant-design/icons";
-import { Avatar, Card } from "antd";
+import { Avatar, Card, Image } from "antd";
 import CardModal from "./CardModal";
 import { useNavigate } from "react-router-dom";
+import {useContext} from "react";
+import {AuthContext} from "../contexts/AuthContext";
 
 const { Meta } = Card;
 
@@ -14,25 +16,56 @@ type DealCardProps = {
 };
 
 function DealCard({ _id, title, descreption, email, image }: DealCardProps) {
+    const {user, updateUser} = useContext(AuthContext)
   const navigate = useNavigate();
 
+    const handleLikeOrDislike=async (dealId:string)=>{
+        const requestOptions = {
+            method: "PATCH",
+            body: JSON.stringify({favId: _id, userID: user?._id}),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+
+        };
+    let response: any
+        if (user?.favDeals.includes(dealId)) {
+            response = await fetch(
+                "http://localhost:5049/api/user/deleteFavourite", requestOptions
+            );
+        }else {
+            response = await fetch(
+                "http://localhost:5049/api/user/addFavourite", requestOptions
+            );
+        }
+        const result = await response.json();
+        updateUser(result.user)
+        console.log("resultresultresult-->",result)
+
+    }
+
+
+
+
+
+
   return (
-    <div>
       <Card
-        style={{ width: 300, marginBottom: "25px" }}
+        style={{ marginBottom: "25px", marginRight:"50px", width:300 }}
         cover={
-          <img
+          <Image
             alt={title}
-            src={image}
-            style={{ width: "300px", height: "200px" }}
+            src={image} height={200}
           />
         }
         actions={[
-          <HeartOutlined
-            style={{ color: "red" }}
-            key="favourite"
-            onClick={() => {}}
-          />,
+            <HeartOutlined
+                style={{ color: user?.favDeals.includes(_id)?"red":"blue" }}
+                key="favourite"
+                onClick={() => {
+                    handleLikeOrDislike(_id)
+                }}
+            />,
           <EllipsisOutlined
             key="ellipsis"
             onClick={() => {
@@ -44,7 +77,6 @@ function DealCard({ _id, title, descreption, email, image }: DealCardProps) {
         <Meta avatar={<Avatar src={image} />} title={title} />
         <CardModal />
       </Card>
-    </div>
   );
 }
 

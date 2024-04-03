@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useContext, useState} from "react";
 import {
   HeartOutlined,
   HomeOutlined,
@@ -8,9 +8,12 @@ import {
 import type { MenuProps } from "antd";
 import { Menu as AntdMenu } from "antd";
 import { Link } from "react-router-dom";
+import {AuthContext} from "../contexts/AuthContext";
 
 const AuthenticatedMenu = () => {
   const [current, setCurrent] = useState("home");
+
+  const {user} = useContext(AuthContext)
 
   const authenticatedItems: MenuProps["items"] = [
     {
@@ -33,7 +36,19 @@ const AuthenticatedMenu = () => {
       key: "account",
       icon: <UserOutlined />,
     },
+    {
+      label: <Link to="about">About </Link>,
+      key: "about",
+      icon: <ReadOutlined />,
+    },
+  ];
 
+  const unauthenticatedItems: MenuProps["items"] = [
+    {
+      label: <Link to="/">Deals</Link>,
+      key: "home",
+      icon: <HomeOutlined />,
+    },
     {
       label: <Link to="signin">Sign in</Link>,
       key: "signin",
@@ -50,16 +65,19 @@ const AuthenticatedMenu = () => {
       icon: <ReadOutlined />,
     },
   ];
+
   const onClick: MenuProps["onClick"] = (e) => {
     console.log("click ", e);
     setCurrent(e.key);
   };
   return (
+
     <AntdMenu
       onClick={onClick}
       selectedKeys={[current]}
       mode="horizontal"
-      items={authenticatedItems}
+      items={user ? authenticatedItems: unauthenticatedItems}
+      style={{marginBottom:"20px"}}
     />
   );
 };

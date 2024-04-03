@@ -25,12 +25,11 @@ export const getOneUser = async (req, res) => {
   const { id } = req.params;
   console.log("id", id);
 
-  const user = await UserModel.findById({ _id: id }).populate({
-    path: "favDeals",
-  });
+  const user = await UserModel.findOne({ _id: id })
   console.log("user", user);
   res.status(200).json(user);
 };
+
 
 export const createUser = async (req, res) => {
   console.log("creating user");
@@ -77,7 +76,7 @@ export const loginUser = async (req, res) => {
 
       if (token) {
         console.log("User verified");
-        res.status(201).json({ message: "User Logged in", token: token });
+        res.status(201).json({ message: "User Logged in", token: token, user:user });
       } else {
         console.log("failed to generate token");
       }
@@ -89,16 +88,29 @@ export const loginUser = async (req, res) => {
   }
 };
 
-export const updateUserFaves = async (req, res) => {
+export const addFavouriteToUser = async (req, res) => {
   console.log("testing user faves func");
-  const { favDeal, userID } = req.body;
-  const user = await UserModel.findOne({
-    _id: userID,
-  });
-  console.log("user :>>", user);
-  const deal = await DealModel.findOne({
-    _id: favDeal,
-  });
-  console.log("favDeal :>>", deal);
-  res.status(201).json({ message: "route working", user, deal });
+  const { favId, userID } = req.body;
+  const user = await UserModel.findOneAndUpdate(
+      { _id: userID },  // Find user by userId
+      {
+        $addToSet: { favDeals: favId }, // Add likeId using $addToSet to prevent duplicates
+      },
+      { new: true } // Return the updated user document
+  )
+  console.log("user-->",user)
+  res.status(201).send({ message: "Fav added",user: user  });
+
+};
+export const deleteFavouriteFromUser = async (req, res) => {
+  console.log("testing user faves func");
+  const { favId, userID } = req.body;
+  const user = await UserModel.findOneAndUpdate(
+      { _id: userID },  // Find user by userId
+      {$pull:{ favDeals: favId }},
+      { new: true } // Return the updated user document
+  )
+  console.log("user-->",user)
+  res.status(201).send({ message: "Fav deleted",user: user });
+
 };

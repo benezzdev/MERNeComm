@@ -10,7 +10,7 @@ import DealRouter from "./routers/dealRouter.js";
 import { cloudinaryConfig } from "./config/cloudinary.js";
 import { passportConfig } from "./config/passportConfig.js";
 const app = express();
-
+console.log("1")
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -18,7 +18,7 @@ app.use(
   })
 );
 app.use(cors());
-
+console.log("2")
 cloudinaryConfig();
 
 const port = process.env.PORT || 5049;
@@ -35,7 +35,9 @@ mongoose
     });
   })
   .catch((err) => console.log(err));
+console.log("3")
 app.use(passport.initialize());
+console.log("4")
 console.log(passportConfig());
 
 app.use("/api/user", UserRouter);

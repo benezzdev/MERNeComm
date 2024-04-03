@@ -24,6 +24,19 @@ export const getOneDeal = async (req, res) => {
   res.status(200).json(deal);
 };
 
+export const getListOfDeals = async (req, res) => {
+  const { ids } = req.body;
+
+   // @ts-ignore
+   let deals = await Promise.all(ids?.map(async (id)=>{
+     let deal = await DealModel.findById({ _id: id });
+     return deal
+   }))
+
+   deals = deals.filter(item=>item)
+   res.status(200).json(deals);
+};
+
 export const createDeal = async (req, res) => {
   console.log("creating deal post");
   const { title, email, descreption, image } = req.body;

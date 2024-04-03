@@ -4,13 +4,15 @@ import {
   getAllUsers,
   getOneUser,
   loginUser,
-  updateUserFaves,
+  addFavouriteToUser,
+  deleteFavouriteFromUser
 } from "../controler/userController.js";
 import { multerUpload } from "../middleware/multer.js";
 const UserRouter = express.Router();
 
 UserRouter.get("/allusers", getAllUsers);
-UserRouter.patch("/updateFavourites", updateUserFaves);
+UserRouter.patch("/addFavourite", addFavouriteToUser);
+UserRouter.patch("/deleteFavourite", deleteFavouriteFromUser);
 
 UserRouter.post("/register", multerUpload.single("avatar"), createUser);
 UserRouter.post("/login", loginUser);

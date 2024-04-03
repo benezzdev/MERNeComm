@@ -1,5 +1,6 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import {ChangeEvent, FormEvent, useContext, useState} from "react";
 import { Link } from "react-router-dom";
+import {AuthContext} from "../contexts/AuthContext";
 
 type credentialsType = {
   email: string;
@@ -7,38 +8,17 @@ type credentialsType = {
 };
 
 function SignUp() {
+  const {createUser} = useContext(AuthContext)
   const [credentials, setCredentials] = useState<credentialsType>(
     {} as credentialsType
   );
   const handleSignupForm = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log("e.target.value", typeof e.target.value);
-    console.log("e.target.name", typeof e.target.name);
-
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
   const submitSignup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("credentials", credentials);
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-
-    const urlencoded = new URLSearchParams();
-    urlencoded.append("email", credentials.email);
-    urlencoded.append("password", credentials.password);
-
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: urlencoded,
-    };
-
-    const response = await fetch(
-      "http://localhost:5049/api/user/register",
-      requestOptions
-    );
-    const result = await response.json();
-    console.log("result", result);
+    createUser(credentials.email,credentials.password)
   };
   return (
     <>

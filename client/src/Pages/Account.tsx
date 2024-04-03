@@ -1,9 +1,14 @@
 import { useContext, useEffect } from "react";
-import { AuthContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
 
+import { AuthContext } from "../contexts/AuthContext";
+
 const Account = () => {
-  const { logoutUser } = useContext(AuthContext);
+  const { user,logoutUser } = useContext(AuthContext);
+  let navigate = useNavigate()
+  console.log("user->",user)
+
   // useEffect(() => {
   //   console.log("profile mounted");
   //   const getUserProfile = async () => {

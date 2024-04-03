@@ -66,7 +66,6 @@ function CreateDeal() {
         />
         <label>Descreption</label>
         <input
-          type="email"
           id="email"
           name="email"
           value={dealInfo.email}
