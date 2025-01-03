@@ -39,7 +39,7 @@ function CreateDeal() {
       body: formdata,
     };
 
-    fetch("http://localhost:5049/api/deal/create", requestOptions)
+    fetch("http://dummyshop.vercel.app/api/deal/create", requestOptions)
       .then((response) => response.json())
       .then((result) => console.log(result))
       .catch((error) => console.error(error));

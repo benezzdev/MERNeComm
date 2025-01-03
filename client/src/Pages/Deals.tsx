@@ -11,7 +11,7 @@ function Deals() {
         method: "GET",
         redirect: "follow",
       };
-      fetch("http://localhost:5049/api/deal/alldeals", requestOptions)
+      fetch("http://dummyshop.vercel.app/api/deal/alldeals", requestOptions)
         .then((response) => response.json())
         .then((result) => setDeals(result))
         .catch((error) => console.error(error));

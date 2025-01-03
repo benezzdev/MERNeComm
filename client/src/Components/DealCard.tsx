@@ -31,11 +31,11 @@ function DealCard({ _id, title, descreption, email, image }: DealCardProps) {
     let response: any
         if (user?.favDeals.includes(dealId)) {
             response = await fetch(
-                "http://localhost:5049/api/user/deleteFavourite", requestOptions
+                "http://dummyshop.vercel.app/api/user/deleteFavourite", requestOptions
             );
         }else {
             response = await fetch(
-                "http://localhost:5049/api/user/addFavourite", requestOptions
+                "http://dummyshop.vercel.app/api/user/addFavourite", requestOptions
             );
         }
         const result = await response.json();

@@ -18,7 +18,7 @@ const Account = () => {
   //     };
   //     try {
   //       const response = await fetch(
-  //         "http://localhost:9876/api/user/profile",
+  //         "http://dummyshop.vercel.app/api/user/profile",
   //         requestOptions
   //       );
   //       const result = await response.json();

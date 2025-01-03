@@ -44,7 +44,7 @@ export const AuthContextProvider = ({ children }: ProviderProps) => {
     };
 
     let userID = localStorage.getItem("userId");
-    fetch(`http://localhost:5049/api/user/${userID}`, requestOptions)
+    fetch(`http://dummyshop.vercel.app/api/user/${userID}`, requestOptions)
         .then(async (response) => {
           let result = await response.json()
           console.log("result->",result)
@@ -101,7 +101,7 @@ useEffect(()=>{
     };
 
     const response = await fetch(
-        "http://localhost:5049/api/user/register",
+        "http://dummyshop.vercel.app/api/user/register",
         requestOptions
     );
     const result = await response.json();
@@ -127,7 +127,7 @@ useEffect(()=>{
     };
 
     const response = await fetch(
-        "http://localhost:5049/api/user/login",
+        "http://dummyshop.vercel.app/api/user/login",
         requestOptions
     );
     const result = await response.json();

@@ -9,8 +9,9 @@ import UserRouter from "./routers/userRouter.js";
 import DealRouter from "./routers/dealRouter.js";
 import { cloudinaryConfig } from "./config/cloudinary.js";
 import { passportConfig } from "./config/passportConfig.js";
+
 const app = express();
-console.log("1")
+console.log("1");
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -18,31 +19,24 @@ app.use(
   })
 );
 app.use(cors());
-console.log("2")
+console.log("2");
 cloudinaryConfig();
 
-const port = process.env.PORT || 5049;
-
+// MongoDB connection
 console.log("process.env.MONGO_URI", process.env.MONGO_URI);
 mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    app.listen(port, () => {
-      console.log(
-        "Connection to MongoDB established, and server is running on port " +
-          port
-      );
-    });
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
-  .catch((err) => console.log(err));
-console.log("3")
-app.use(passport.initialize());
-console.log("4")
-console.log(passportConfig());
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("Could not connect to MongoDB", err));
 
+// Example API endpoint
 app.use("/api/user", UserRouter);
 app.use("/api/deal", DealRouter);
 
-app.use("*", (req, res) =>
-  res.status(404).json({ error: "Endpoint not found." })
-);
+const PORT = process.env.PORT || 6069;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

@@ -26,7 +26,7 @@ function Favourites({}: Props) {
     };
 console.log("useruseruseruser->",user)
 
-    fetch("http://localhost:5049/api/deal/getListOfDeals", requestOptions)
+    fetch("http://dummyshop.vercel.app/api/deal/getListOfDeals", requestOptions)
         .then(async (response) => {
           console.log("response->",response)
 let list =  await response.json()
