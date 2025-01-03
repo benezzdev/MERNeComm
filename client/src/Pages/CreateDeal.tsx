@@ -55,6 +55,7 @@ function CreateDeal() {
           name="title"
           value={dealInfo.title}
           onChange={handleCreateDeal}
+          placeholder="Title"
         />
         <label>Title</label>
         <input
@@ -63,6 +64,7 @@ function CreateDeal() {
           name="descreption"
           value={dealInfo.descreption}
           onChange={handleCreateDeal}
+          placeholder="Descreption"
         />
         <label>Descreption</label>
         <input
@@ -70,6 +72,7 @@ function CreateDeal() {
           name="email"
           value={dealInfo.email}
           onChange={handleCreateDeal}
+          placeholder="Contact email"
         />
         <label>Contact email </label>
         <input
@@ -78,6 +81,7 @@ function CreateDeal() {
           //   name="filename"
           //   value={dealInfo.image}
           onChange={handleCreateDeal}
+          placeholder="Upload Image"
         />
         <label>Upload Image</label>
 
